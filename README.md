@@ -1,2 +1,2 @@
 # WhatsUp
-With a crawler fetching news everyday, WhatsUp aims at assisting Millie to learn English.
+With a crawler fetching news everyday, WhatsUp aims at assisting Millie to learn English. (Just kidding!:))
