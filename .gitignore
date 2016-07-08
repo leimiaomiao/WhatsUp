@@ -1,0 +1,5 @@
+.idea/*
+.scrapy
+__pycache__
+files/*
+data/*
