@@ -63,12 +63,18 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
+# The integer values you assign to classes in this setting determine the order in which they run: items go through from
+# lower valued to higher valued classes. It's customary to define these numbers in the 0-1000 range.
 ITEM_PIPELINES = {
-    'Whatsup.pipelines.WhatsupPipeline': 300,
-    'Whatsup.pipelines.WhatsupImagesPipeline': 200
+    'Whatsup.pipelines.DuplicatesPipeline': 100,
+    'Whatsup.pipelines.WhatsupImagesPipeline': 200,
+    'Whatsup.pipelines.MongoPipeline': 300,
 }
 
 IMAGES_STORE = 'files'
+
+MONGO_URI = "localhost"
+MONGO_DATABASE = "Whatsup"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
