@@ -66,14 +66,17 @@ ROBOTSTXT_OBEY = True
 # The integer values you assign to classes in this setting determine the order in which they run: items go through from
 # lower valued to higher valued classes. It's customary to define these numbers in the 0-1000 range.
 ITEM_PIPELINES = {
-    'Whatsup.pipelines.DuplicatesPipeline': 100,
-    'Whatsup.pipelines.WhatsupImagesPipeline': 200,
-    'Whatsup.pipelines.MongoPipeline': 300,
+    'Whatsup.pipelines.DuplicatesPipeline': 1,
+    'Whatsup.pipelines.DataCleanPipiline': 2,
+    'Whatsup.pipelines.WhatsupImagesPipeline': 3,
+    'Whatsup.pipelines.AudioPipeline': 4,
+    'Whatsup.pipelines.MongoPipeline': 5,
 }
 
 IMAGES_STORE = 'files'
+FILES_STORE = 'audios'
 
-MONGO_URI = "localhost"
+MONGO_URI = "mongodb://localhost"
 MONGO_DATABASE = "Whatsup"
 
 # Enable and configure the AutoThrottle extension (disabled by default)

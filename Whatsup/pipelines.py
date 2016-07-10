@@ -15,6 +15,7 @@ import scrapy
 import json
 from scrapy.exceptions import DropItem
 from scrapy.pipelines.images import ImagesPipeline
+from scrapy.pipelines.files import FilesPipeline
 import pymongo
 
 
@@ -53,6 +54,15 @@ class DuplicatesPipeline(object):
             raise DropItem("Duplicate item found: %s" % item)
         else:
             self.urls_seen.add(item['url'])
+            return item
+
+
+class DataCleanPipiline(object):
+    def process_item(self, item, spider):
+        if len(str.strip(item['content'])) <= 0:
+            raise DropItem("Content is null: %s" % item)
+        else:
+            return item
 
 
 class JsonWriterPipeline(object):
@@ -88,4 +98,16 @@ class WhatsupImagesPipeline(ImagesPipeline):
         image_paths = [x['path'] for ok, x in results if ok]
         if image_paths:
             item['image_paths'] = image_paths
+        return item
+
+
+class AudioPipeline(FilesPipeline):
+    def get_media_requests(self, item, info):
+        for audio_url in item['audio']:
+            yield scrapy.Request(audio_url)
+
+    def item_completed(self, results, item, info):
+        audio_path = [x['path'] for ok, x in results if ok]
+        if audio_path:
+            item['audio'] = audio_path
         return item
