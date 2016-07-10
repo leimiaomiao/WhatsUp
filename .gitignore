@@ -3,4 +3,5 @@
 __pycache__
 files/*
 data/*
+audios/*
 *.iml
